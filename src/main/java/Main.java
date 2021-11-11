@@ -53,15 +53,34 @@ public class Main {
                         }
                     }
                     break;
-                default:  //пользователь ввёл новое движение для лягушки
-                    //удаляем все команды которые были отменены
-                    clearJumpHistory();
-                    System.out.println("Введите кол-во клеток поля для прыжка");
-                    int steps = Integer.parseInt(scanner.nextLine());
-                    FrogCommand cmd = FrogCommands.jumpRightCommand(frog, steps);
-                    if (cmd.doit()) {
-                        commands.add(cmd);
-                        curCommand++;
+                default:
+                    System.out.println("""
+                            Выберите направление прыжка
+                            L - влево
+                            R - вправо""");
+
+                    input = scanner.nextLine();
+
+                    if(input.equals("L")){
+                        clearJumpHistory();
+                        System.out.println("Введите кол-во клеток поля для прыжка");
+                        int steps = Integer.parseInt(scanner.nextLine());
+                        FrogCommand cmd = FrogCommands.jumpLeftCommand(frog, steps);
+                        if (cmd.doit()) {
+                            commands.add(cmd);
+                            curCommand++;
+                        }
+                    }else if(input.equals("R")){
+                        clearJumpHistory();
+                        System.out.println("Введите кол-во клеток поля для прыжка");
+                        int steps = Integer.parseInt(scanner.nextLine());
+                        FrogCommand cmd = FrogCommands.jumpRightCommand(frog, steps);
+                        if (cmd.doit()) {
+                            commands.add(cmd);
+                            curCommand++;
+                        }
+                    }else{
+                        System.out.println("Не знаем такого направления");
                     }
                     break;
             }

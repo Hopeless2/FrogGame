@@ -14,4 +14,19 @@ public class FrogCommands {
             }
         };
     }
+
+    public static FrogCommand jumpLeftCommand(Frog frog, int steps) {
+        return new FrogCommand() {
+            @Override
+            public boolean doit() {
+                return frog.jump(steps * -1);
+
+            }
+
+            @Override
+            public boolean undo() {
+                return frog.jump(steps);
+            }
+        };
+    }
 }
